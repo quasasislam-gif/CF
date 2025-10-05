@@ -1,9 +1,9 @@
 services:
 - type: web
-  name: n8n-content-engine
+  name: n8n-content-engine            # edit if you want a different name
   env: docker
-  autoDeploy: true
   plan: starter
+  autoDeploy: true
   disk:
     name: n8n-data
     mountPath: /data
@@ -11,28 +11,31 @@ services:
   envVars:
   - key: N8N_ENCRYPTION_KEY
     generateValue: true
-  - key: N8N_HOST
-    value: your-service.onrender.com
   - key: N8N_PROTOCOL
     value: https
   - key: N8N_PORT
     value: $PORT
+  - key: N8N_HOST
+    value: n8n-content-engine.onrender.com        # set to match service name
   - key: N8N_EDITOR_BASE_URL
-    value: https://your-service.onrender.com/
+    value: https://n8n-content-engine.onrender.com/
   - key: WEBHOOK_URL
-    value: https://your-service.onrender.com/
+    value: https://n8n-content-engine.onrender.com/
   - key: GENERIC_TIMEZONE
     value: Australia/Sydney
   - key: N8N_BASIC_AUTH_ACTIVE
     value: "true"
   - key: N8N_BASIC_AUTH_USER
-    value: admin
+    value: admin                                   # set
   - key: N8N_BASIC_AUTH_PASSWORD
-    value: change_this
+    value: cd67czS6SBUkeG2                            # set
   - key: N8N_DEFAULT_BINARY_DATA_MODE
     value: filesystem
   - key: AZURE_SPEECH_REGION
     value: australiaeast
-  # Set these in the Render Dashboard after deploy (don’t commit secrets):
+  # Add these **in the Render dashboard after first deploy** (do not commit secrets):
   # - AZURE_SPEECH_KEY
   # - PEXELS_API_KEY
+  # Optional hardening:
+  # - N8N_DIAGNOSTICS_ENABLED=false
+  # - N8N_PERSONALIZATION_ENABLED=false
